@@ -38,8 +38,12 @@ def main() -> None:
                 
             g.simplify(max_distance=distance)
 
-            if len(gpx_files) > 1 or (not output):
+            if output:
+                out_gpx = output
+            elif len(gpx_files) > 1:
                 out_gpx = common.prefix_filename(gpx_file, prefix)
+            else:
+                print("No output file specified")
 
             with open(out_gpx, "w", encoding='utf-8') as f:
                 f.write(g.to_xml())
